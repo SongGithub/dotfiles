@@ -87,6 +87,8 @@ source $ZSH/oh-my-zsh.sh
 # Cluster configs
 alias kube-dev="export KUBECONFIG=$HOME/.kube/config.dev:$HOME/.kube/config"
 alias kube-minikube="export KUBECONFIG=$HOME/.kube/config.minikube:$HOME/.kube/config"
+alias kube-preprod="export KUBECONFIG=$HOME/.kube/config.preprod:$HOME/.kube/config"
+alias kube-prod="export KUBECONFIG=$HOME/.kube/config.prod:$HOME/.kube/config"
 # kubectl
 alias kb="kubectl"
 # Kubernetes
