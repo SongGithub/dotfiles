@@ -180,8 +180,8 @@ alias dcb='docker-compose build'
 alias dcu='docker-compose up'
 
 # myob-auth
-alias auth-central-prod='myob-auth login --username song.jin --role adfs-ex-central-production-poweruser'
-alias auth-central-dev='myob-auth login --username song.jin --role adfs-ex-central-development-poweruser'
+alias auth-central-prod='myob-auth login --username song.jin --role adfs-ex-central-production-admin'
+alias auth-central-dev='myob-auth login --username song.jin --role adfs-ex-central-development-admin'
 alias auth-cluster-prod='myob-auth login --username song.jin --role adfs-ex-cluster-production-admin'
 alias auth-cluster-preprod='myob-auth login --username song.jin --role adfs-ex-cluster-preprod-admin'
 
