@@ -5,9 +5,10 @@ DATE=$(date +"%m-%d-%y")
 TIME=$(date +"%r")
 
 COMMIT_MSG=$COMMIT_LEAD_MSG$TIME$DATE
-echo 'adding all files to commit'
+echo 'adding all files to commit...'
 git add .
 echo 'committing...'
+echo '/n'
 echo $COMMIT_MSG
 ECHO_COMMIT_MSG="commit messege is:$COMMIT_MSG"
 echo $ECHO_COMMIT_MSG
