@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COMMIT_LEAD_MSG='daily commit, date time is'
+COMMIT_LEAD_MSG='auto cron commit, date time is'
 DATE=$(date +"%m-%d-%y")
 TIME=$(date +"%r")
 

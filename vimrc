@@ -7,7 +7,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
 Plug 'shougo/neocomplete.vim'
 Plug 'majutsushi/tagbar'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
@@ -48,11 +48,11 @@ let g:go_fmt_command = "goimports"
 :set backspace=indent,eol,start
 
 " Highlight
-let g:go_highlight_functions = 1  
-let g:go_highlight_methods = 1  
-let g:go_highlight_structs = 1  
-let g:go_highlight_operators = 1  
-let g:go_highlight_build_constraints = 1  
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 " Neocomplete: Use smartcase.
 let g:neocomplete#enable_smart_case = 1
