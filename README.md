@@ -3,7 +3,7 @@
 Just a bunch of dotfiles
 
 ```
-git clone git@github.com:gugahoi/dotfiles.git ~/.dotfiles
+git clone git@github.com:songgithub/dotfiles.git ~/.dotfiles
 ```
 
 - zsh

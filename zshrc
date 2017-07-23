@@ -60,3 +60,9 @@ export PATH="$PATH:$GOPATH/bin"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 # kb auto suggestions
 source <(kubectl completion zsh)
+
+
+# virtualenv wrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh

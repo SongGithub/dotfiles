@@ -233,9 +233,10 @@ function o() {
 # small enough for one screen.
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
 
 # run Visual Studio Code from zsh on Mac
-function code {
+function code() {
     if [[ $# = 0 ]]
     then
         open -a "Visual Studio Code"
@@ -244,4 +245,12 @@ function code {
         [[ $1 = /* ]] && argPath="$1" || argPath="$PWD/${1#./}"
         open -a "Visual Studio Code" "$argPath"
     fi
+}
+
+
+# fetch all remote branches to local drive
+function fetch-all() {
+    for branch in $(git branch --all | grep '^\s*remotes' | egrep --invert-match '(:?HEAD|master)$'); do
+        git branch --track "${branch##*/}" "$branch"
+    done
 }
