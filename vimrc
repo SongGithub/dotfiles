@@ -2,7 +2,7 @@ call plug#begin(expand('~/.vim/bundle'))
 " Use single quotes
 
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
 Plug 'shougo/neocomplete.vim'
@@ -13,9 +13,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
 " Auto Start NerdTREE
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 " Go to document window
-autocmd VimEnter * wincmd p
+" autocmd VimEnter * wincmd p
 
 " Auto Start Neocomplete
 let g:neocomplete#enable_at_startup = 1
