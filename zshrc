@@ -62,3 +62,4 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 source <(kubectl completion zsh)
 
 . /usr/local/bin/virtualenvwrapper.sh
+export GITHUB_TOKEN=5798ee47a77490ef3653aa853303bbbd40f2e757
