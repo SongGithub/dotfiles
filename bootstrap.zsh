@@ -8,8 +8,7 @@ then
 fi
 
 
-xcode-select -p > /dev/null
-if [ $? -ne 0 ];
+if ! xcode-select -p > /dev/null;
 then
   echo "Installing xcode CLI tools"
   xcode-select --install
@@ -46,7 +45,7 @@ fi
 software_list=( bash tig icdiff vim zsh-syntax-highlighting zsh-autosuggestions)
 for item in "${software_list[@]}"; do
   echo "install or upgrading package: $item"
-  if [ -z $(brew list | grep "$item") ]; then
+  if brew list | grep -q "$item"; then
     brew install "$item"
   else
     brew upgrade "$item" 2>/dev/null
