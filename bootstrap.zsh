@@ -2,14 +2,14 @@
 
 DIR="$( echo "$( dirname "$0" )" && pwd )"
 
-if [[ $SHELL != *"zsh"* ]]; 
+if [[ $SHELL != *"zsh"* ]];
 then
   echo "Installing oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
 xcode-select -p > /dev/null
-if [ $? -ne 0 ]; 
+if [ $? -ne 0 ];
 then
   echo "Installing xcode CLI tools"
   xcode-select --install
@@ -25,7 +25,7 @@ echo "Linking files"
 mkdir -p  ~/.dotfiles_backup
 for f in "aliases" "exports" "functions" "vimrc" "zshrc"
 do
-  echo "Linking \"$f\"" 
+  echo "Linking \"$f\""
   if [ -f ~/.$f ]; then
     echo "Original file exists, backing it up"
     mv ~/.$f ~/.dotfiles_backup/$f
@@ -33,6 +33,12 @@ do
   ln -s ~/.dotfiles/$f ~/.$f
   echo "Linked \"$f\""
 done
+
+
+# link Sublime Text
+if [ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]; then
+  ln -sv "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+fi
 
 echo "Installing zsh-syntax-highlighting"
 brew install zsh-syntax-highlighting

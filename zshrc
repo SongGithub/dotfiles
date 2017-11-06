@@ -2,7 +2,7 @@
 export ZSH=~/.oh-my-zsh
 
 # https://github.com/sindresorhus/pure.git
-ZSH_THEME="robbyrussell"  
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -51,10 +51,15 @@ source $ZSH/oh-my-zsh.sh
 source ~/.{aliases,functions,exports}
 
 # GOPATH
-export GOPATH=~/.go
-export PATH="$PATH:$GOPATH/bin" 
+export GOPATH=$HOME/go-workspace
+export GOROOT=/usr/local/opt/go/libexec
+export GOBIN=$GOPATH/bin
 
-## AWS auto completion
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$GOROOT/bin"
+export PATH="$PATH:$HOME/bin"
+
+# AWS auto completion
 #source /usr/local/share/zsh/site-functions/_aws
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -66,3 +71,4 @@ source <(kubectl completion zsh)
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
+
