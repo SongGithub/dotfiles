@@ -11,9 +11,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
- "Auto Start NerdTREE
-"autocmd vimenter * NERDTree
- "Go to document window
+"Go to document window
 "autocmd VimEnter * wincmd p
 
 " Auto Start Neocomplete

@@ -42,18 +42,19 @@ else
   echo "already exists, skipping"
 fi
 
-software_list=( bash tig icdiff vim zsh-syntax-highlighting zsh-autosuggestions)
+software_list=( bash tig icdiff vim zsh-syntax-highlighting \
+  zsh-autosuggestions python3 )
 for item in "${software_list[@]}"; do
-  echo "install or upgrading package: $item"
-  if brew list | grep -q "$item"; then
+  if ! brew list | grep -q "$item"; then
+    echo "installing fresh $item"
     brew install "$item"
   else
+    echo "upgrading $item"
     brew upgrade "$item" 2>/dev/null
   fi
 done
 
-if [ ! -f ~/.vim/autoload/plug.vim ];
-then
+if [ ! -f ~/.vim/autoload/plug.vim ]; then
   echo "Installing Vim-Plug"
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -61,5 +62,7 @@ fi
 
 echo "Configuring VIM"
 vim +PlugInstall +qall
+
+sudo pip3 install virtualenv virtualenvwrapper
 
 echo "Done configuring the system, please reboot :D"
