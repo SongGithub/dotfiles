@@ -42,12 +42,21 @@ else
   echo "already exists, skipping"
 fi
 
+
+# brew installs
 software_list=( bash tig icdiff vim zsh-syntax-highlighting \
   zsh-autosuggestions python3 )
 for item in "${software_list[@]}"; do
   if ! brew list | grep -q "$item"; then
-    echo "installing fresh $item"
+    echo "Installing fresh $item"
     brew install "$item"
+    # add comment and 'source' cmd only if it was not already in zshrc file
+    if [ "$item" == "zsh-autosuggestions" ] && ! grep -q "# adding zsh-autosuggestions.zsh" "zshrc" ; then
+      echo "Also adding source to zshrc file..."
+      printf "\
+        \n\n# adding zsh-autosuggestions.zsh \
+        \nsource /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> zshrc
+    fi
   else
     echo "upgrading $item"
     brew upgrade "$item" 2>/dev/null
@@ -63,6 +72,19 @@ fi
 echo "Configuring VIM"
 vim +PlugInstall +qall
 
-sudo pip3 install virtualenv virtualenvwrapper
+
+# pip installs
+
+software_list=( virtualenv virtualenvwrapper )
+for item in "${software_list[@]}"; do
+  if ! pip3 freeze | grep -q "$item"==*; then
+    echo "installing fresh $item"
+    pip3 install --user "$item"
+  else
+    echo "upgrading $item"
+    pip3 install --user --upgrade "$item"
+  fi
+done
+
 
 echo "Done configuring the system, please reboot :D"
