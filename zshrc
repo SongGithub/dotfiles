@@ -2,7 +2,7 @@
 export ZSH=~/.oh-my-zsh
 
 # https://github.com/sindresorhus/pure.git
-ZSH_THEME="robbyrussell"  
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -42,7 +42,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(git docker z zsh-autosuggestions)
+plugins=(git docker z)
 
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
@@ -51,15 +51,27 @@ source $ZSH/oh-my-zsh.sh
 source ~/.{aliases,functions,exports}
 
 # GOPATH
-export GOPATH=~/.go
-export PATH="$PATH:$GOPATH/bin" 
+export GOPATH=$HOME/go-workspace
+export GOROOT=/usr/local/opt/go/libexec
+export GOBIN=$GOPATH/bin
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$GOROOT/bin"
+export PATH="$PATH:$HOME/bin"
 
-## AWS auto completion
+# AWS auto completion
 #source /usr/local/share/zsh/site-functions/_aws
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 # kb auto suggestions
 source <(kubectl completion zsh)
 
-. /usr/local/bin/virtualenvwrapper.sh
-export GITHUB_TOKEN=5798ee47a77490ef3653aa853303bbbd40f2e757
+# virtualenv wrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/code
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+source /usr/local/bin/virtualenvwrapper.sh
+
+
+# adding zsh-autosuggestions.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

@@ -9,7 +9,7 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Shortcuts
-alias d="cd ~/Documents/Dropbox"
+alias d="cd ~/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
@@ -122,12 +122,6 @@ alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
 alias spoton="sudo mdutil -a -i on"
 
-# PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
-alias plistbuddy="/usr/libexec/PlistBuddy"
-
-# Airport CLI alias
-alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
-
 # Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
 # (useful when executing time-consuming commands)
 alias badge="tput bel"
@@ -180,10 +174,11 @@ alias dcb='docker-compose build'
 alias dcu='docker-compose up'
 
 # myob-auth
-alias auth-central-prod='myob-auth login --username song.jin --role adfs-ex-central-production-admin'
-alias auth-central-dev='myob-auth login --username song.jin --role adfs-ex-central-development-admin'
-alias auth-cluster-prod='myob-auth login --username song.jin --role adfs-ex-cluster-production-admin'
-alias auth-cluster-preprod='myob-auth login --username song.jin --role adfs-ex-cluster-preprod-admin'
+
+alias auth-central-prod='myob-auth login --username `whoami` --role adfs-ex-central-production-admin'
+alias auth-central-dev='myob-auth login --username `whoami` --role adfs-ex-central-development-admin'
+alias auth-cluster-prod='myob-auth login --username `whoami` --role adfs-ex-cluster-production-admin'
+alias auth-cluster-preprod='myob-auth login --username `whoami` --role adfs-ex-cluster-preprod-admin'
 
 
 # Cluster configs
@@ -194,5 +189,5 @@ alias kube-prod="export KUBECONFIG=$HOME/.kube/config.prod:$HOME/.kube/config"
 
 # kubectl
 alias kb="kubectl"
-alias kb-ctx="kb config get-contexts"
-alias kb-p="kb proxy --port"
+alias kbctx="kb config get-contexts"
+alias kbp="kb proxy --port"
