@@ -12,7 +12,7 @@ alias -- -="cd -"
 alias d="cd ~/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias p="cd ~/projects"
+alias ws="cd ~/workspaces"
 alias g="git"
 alias h="history"
 alias j="jobs"
@@ -191,3 +191,8 @@ alias kube-prod="export KUBECONFIG=$HOME/.kube/config.prod:$HOME/.kube/config"
 alias kb="kubectl"
 alias kbctx="kb config get-contexts"
 alias kbp="kb proxy --port"
+
+# python
+alias pip=pip3
+alias python=python3
+alias py=python3
