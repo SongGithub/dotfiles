@@ -181,12 +181,6 @@ alias auth-cluster-prod='myob-auth login --username `whoami` --role adfs-ex-clus
 alias auth-cluster-preprod='myob-auth login --username `whoami` --role adfs-ex-cluster-preprod-admin'
 
 
-# Cluster configs
-alias kube-dev="export KUBECONFIG=$HOME/.kube/config.dev:$HOME/.kube/config"
-alias kube-minikube="export KUBECONFIG=$HOME/.kube/config.minikube:$HOME/.kube/config"
-alias kube-preprod="export KUBECONFIG=~/.kube/config.preprod:~/.kube/config"
-alias kube-prod="export KUBECONFIG=$HOME/.kube/config.prod:$HOME/.kube/config"
-
 # kubectl
 alias kb="kubectl"
 alias kbctx="kb config get-contexts"
