@@ -45,33 +45,28 @@ HIST_STAMPS="dd/mm/yyyy"
 plugins=(git docker z)
 
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-
 source $ZSH/oh-my-zsh.sh
+source ~/.aliases
+source ~/.functions
+source ~/.exports
 
-source ~/.{aliases,functions,exports}
-
-# GOPATH
-export GOPATH=$HOME/go-workspace
-export GOROOT=/usr/local/opt/go/libexec
-export GOBIN=$GOPATH/bin
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$GOROOT/bin"
-export PATH="$PATH:$HOME/bin"
 
 # AWS auto completion
 #source /usr/local/share/zsh/site-functions/_aws
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
 # kb auto suggestions
 source <(kubectl completion zsh)
 
+
 # virtualenv wrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/code
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
 
 
 # adding zsh-autosuggestions.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# PYENV
+eval "$(pyenv init -)"

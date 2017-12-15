@@ -186,7 +186,3 @@ alias kb="kubectl"
 alias kbctx="kb config get-contexts"
 alias kbp="kb proxy --port"
 
-# python
-alias pip=pip3
-alias python=python3
-alias py=python3
