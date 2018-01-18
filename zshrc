@@ -69,4 +69,4 @@ source /usr/local/bin/virtualenvwrapper.sh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # PYENV
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
