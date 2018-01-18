@@ -184,6 +184,6 @@ alias auth-cluster-preprod='myob-auth login --username `whoami` --role adfs-ex-c
 
 # kubectl
 alias k="kubectl"
-alias kgctx="kb config get-contexts"
-alias kbp="kb proxy --port"
+alias kgctx="k config get-contexts"
+alias kbp="k proxy --port"
 alias kns="kubectx"
