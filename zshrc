@@ -68,5 +68,5 @@ source /usr/local/bin/virtualenvwrapper.sh
 # adding zsh-autosuggestions.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# PYENV
-# eval "$(pyenv init -)"
+source .kuberc && source .admin_kuberc
+

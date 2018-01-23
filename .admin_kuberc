@@ -1,0 +1,42 @@
+# Cluster configs for PE tribe
+alias k-auth-dev="myob-auth k -e dev -n kube-system"
+
+k-pf-prometheus() {
+ export POD_NAME=$(kubectl get pods --namespace $1 -l "app=prometheus,component=server" -o jsonpath="{.items[0].metadata.name}")
+ kubectl --namespace $1 port-forward $POD_NAME 9090
+}
+
+k-pf-grafana() {
+ export POD_NAME=$(k get pods --namespace $1 -l "app=grafana-grafana" -o jsonpath="{.items[0].metadata.name}")
+ k --namespace $1 port-forward $POD_NAME 3000
+}
+
+
+k-pf-am() {
+ export POD_NAME=$(k get pods --namespace $1 -l "app=prometheus,component=alertmanager" -o jsonpath="{.items[0].metadata.name}")
+ k --namespace $1 port-forward $POD_NAME 9093
+}
+
+
+k-pods-all() {
+  params=($*)
+  k-pods --all-namespaces --show-all $params
+}
+
+k-pods-labels() {
+  params=($*)
+  k get pods --all-namespaces --show-labels |grep "$1"
+}
+
+k-nodes() {
+  k get nodes $*
+}
+
+k-nodes-desc() {
+  k describe nodes $*
+}
+
+w-k-nodes() {
+  cmd="kubectl get nodes $*"
+  watch $cmd
+}

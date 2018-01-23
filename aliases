@@ -180,10 +180,5 @@ alias auth-central-prod='myob-auth login --username `whoami` --role adfs-ex-cent
 alias auth-central-dev='myob-auth login --username `whoami` --role adfs-ex-central-development-admin'
 alias auth-cluster-prod='myob-auth login --username `whoami` --role adfs-ex-cluster-production-admin'
 alias auth-cluster-preprod='myob-auth login --username `whoami` --role adfs-ex-cluster-preprod-admin'
-
-
-# kubectl
-alias k="kubectl"
-alias kgctx="k config get-contexts"
-alias kbp="k proxy --port"
-alias kns="kubectx"
+alias auth-k-dev='myob-auth k -e dev'
+alias auth-k-qa='myob-auth k -e jupiter-qa'

@@ -1,0 +1,36 @@
+# Cluster configs
+DEFAULT_KUBE_NAMESPACE="ADD_YOUR_TRIBE_NAMESPACE_HERE"
+alias k-auth-preprod="myob-auth k -e jupiter-preprod -n $DEFAULT_KUBE_NAMESPACE"
+alias k-auth-prod="myob-auth k -e jupiter -n $DEFAULT_KUBE_NAMESPACE"
+alias k-auth-clear="rm $HOME/.kube/config"
+
+# kubectl
+alias k="kubectl"
+alias kgctx="k config get-contexts"
+alias kbp="k proxy --port"
+alias kns="kubens"
+
+k-tail() {
+  kubetail -v foo >/dev/null 2>&1 || { echo >&2 "kubetail not installed.  See: https://github.com/johanhaleby/kubetail for installation instructions."; return 0; }
+  kubetail $*
+}
+
+k-events() {
+  params=($*)
+  k get ev -o=custom-columns=Name:metadata.name,Reason:reason,Type:type,Kind:involvedObject.kind,FirstSeen:firstTimestamp,LastSeen:lastTimestamp,Component:source.component --sort-by='lastTimestamp' ${params}
+}
+
+k-pods() {
+  params=($*)
+  k get pods -o custom-columns=Name:metadata.name,Host:spec.nodeName,Status:status.phase $params
+}
+
+k-pods-g() {
+  k-pods |grep "$1"
+}
+
+w-k-events() {
+  params=($*)
+  cmd="kubectl get ev -o=custom-columns=Name:metadata.name,Reason:reason,Type:type,Kind:involvedObject.kind,FirstSeen:firstTimestamp,LastSeen:lastTimestamp,Component:source.component --sort-by='lastTimestamp' ${params}"
+  watch $cmd
+}
