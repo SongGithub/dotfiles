@@ -1,0 +1,9 @@
+# MYOB specific settings
+
+
+## myob-auth
+
+alias auth-central-prod='myob-auth login --username `whoami` --role adfs-ex-central-production-admin'
+alias auth-central-dev='myob-auth login --username `whoami` --role adfs-ex-central-development-admin'
+alias auth-cluster-prod='myob-auth login --username `whoami` --role adfs-ex-cluster-production-admin'
+alias auth-cluster-preprod='myob-auth login --username `whoami` --role adfs-ex-cluster-preprod-admin'

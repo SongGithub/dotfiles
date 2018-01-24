@@ -68,5 +68,5 @@ source /usr/local/bin/virtualenvwrapper.sh
 # adding zsh-autosuggestions.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-source .kuberc && source .admin_kuberc
 
+source .kuberc && source .admin_kuberc && source .myobrc
