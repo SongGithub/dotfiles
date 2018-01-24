@@ -69,4 +69,4 @@ source /usr/local/bin/virtualenvwrapper.sh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
-source .kuberc && source .admin_kuberc && source .myobrc
+source .kuberc && source .admin_kuberc && source .myob_rc
