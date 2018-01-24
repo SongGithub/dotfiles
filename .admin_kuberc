@@ -1,5 +1,7 @@
 # Cluster configs for PE tribe
-alias k-auth-dev="myob-auth k -e dev -n kube-system"
+alias auth-k-dev='myob-auth k -e dev'
+alias auth-k-qa='myob-auth k -e jupiter-qa'
+
 
 k-pf-prometheus() {
  export POD_NAME=$(kubectl get pods --namespace $1 -l "app=prometheus,component=server" -o jsonpath="{.items[0].metadata.name}")
