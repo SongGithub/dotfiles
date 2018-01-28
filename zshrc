@@ -49,6 +49,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/.aliases
 source ~/.functions
 source ~/.exports
+source ~/.kuberc && source ~/.admin_kuberc && source ~/.myob_rc
 
 
 # AWS auto completion
@@ -69,4 +70,3 @@ source /usr/local/bin/virtualenvwrapper.sh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
-source .kuberc && source .admin_kuberc && source .myob_rc
