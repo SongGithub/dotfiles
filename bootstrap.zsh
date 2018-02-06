@@ -23,7 +23,7 @@ fi
 
 echo "Linking files"
 mkdir -p  ~/.dotfiles_backup
-for f in "aliases" "exports" "functions" "vimrc" "zshrc"; do
+for f in "aliases" "exports" "functions" "vimrc" "zshrc" "kuberc" "admin_kuberc" "myob_rc"; do
   echo "Linking \"$f\""
   if [ -f ~/.$f ]; then
     echo "Original file exists, backing it up"
