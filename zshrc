@@ -70,3 +70,6 @@ source /usr/local/bin/virtualenvwrapper.sh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
+
+# added by travis gem
+[ -f /Users/song/.travis/travis.sh ] && source /Users/song/.travis/travis.sh
