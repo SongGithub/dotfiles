@@ -71,5 +71,9 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 
-# added by travis gem
-[ -f /Users/song.jin/.travis/travis.sh ] && source /Users/song.jin/.travis/travis.sh
+# # added by travis gem
+# <<<<<<< HEAD
+# [ -f /Users/song.jin/.travis/travis.sh ] && source /Users/song.jin/.travis/travis.sh
+# =======
+# [ -f /Users/song/.travis/travis.sh ] && source /Users/song/.travis/travis.sh
+# >>>>>>> be6c1a143703395b6acf468cbff69159bfd13665
