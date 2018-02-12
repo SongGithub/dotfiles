@@ -34,3 +34,7 @@ w-k-events() {
   cmd="kubectl get ev -o=custom-columns=Name:metadata.name,Reason:reason,Type:type,Kind:involvedObject.kind,FirstSeen:firstTimestamp,LastSeen:lastTimestamp,Component:source.component --sort-by='lastTimestamp' ${params}"
   watch $cmd
 }
+
+kc () {
+  kubectl config current-context
+}

@@ -34,6 +34,22 @@ for f in "aliases" "exports" "functions" "vimrc" "zshrc" "kuberc" "admin_kuberc"
 done
 
 
+echo "Linking RC files"
+mkdir -p  ~/.dotfiles_backup
+
+# for filename in ./rc_files/*; do echo "put ${filename}"; done
+
+for f in ./rc_files/*; do
+  echo "Linking RC files\"$f\""
+  if [ -f ~/.$f ]; then
+    echo "Original file exists, backing it up"
+    mv ~/.$f ~/.dotfiles_backup/$f
+  fi
+  ln -s ~/.dotfiles/rc_files/$f ~/.$f
+  echo "Linked \"$f\""
+done
+
+
 # link Sublime Text
 if [ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ] \
 && [ ! -e /usr/local/bin/subl ]; then
