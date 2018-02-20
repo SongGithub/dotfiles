@@ -23,7 +23,7 @@ fi
 
 echo "Linking files"
 mkdir -p  ~/.dotfiles_backup
-for f in "aliases" "exports" "functions" "vimrc" "zshrc" "kuberc" "admin_kuberc" "myob_rc"; do
+for f in "aliases" "exports" "functions" "vimrc" "zshrc"; do
   echo "Linking \"$f\""
   if [ -f ~/.$f ]; then
     echo "Original file exists, backing it up"
@@ -34,23 +34,26 @@ for f in "aliases" "exports" "functions" "vimrc" "zshrc" "kuberc" "admin_kuberc"
 done
 
 
-echo "Linking RC files"
+echo "Linking RC files "
 mkdir -p  ~/.dotfiles_backup
 
-# for filename in ./rc_files/*; do echo "put ${filename}"; done
+for f in rc_files/*; do
+  file_name=$(basename "$f")
+  echo "  processing RC file: \"$file_name\""
 
-for f in ./rc_files/*; do
-  echo "Linking RC files\"$f\""
-  if [ -f ~/.$f ]; then
-    echo "Original file exists, backing it up"
-    mv ~/.$f ~/.dotfiles_backup/$f
+  if [ -L ~/.$file_name ]; then
+    echo "    Original file exists, backing it up"
+    mv ~/.$file_name ~/.dotfiles_backup/$file_name
+  else
+    echo "    *********** Linking \"$file_name\""
+    # ln -s "$PWD"/$f ~/.$file_name 2> /dev/null || echo "error linking files" && exit 1
+    ln -s "$PWD"/$f ~/.$file_name
+    echo "    Linked \"$file_name\""
   fi
-  ln -s ~/.dotfiles/rc_files/$f ~/.$f
-  echo "Linked \"$f\""
 done
 
 
-# link Sublime Text
+echo "link Sublime Text"
 if [ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ] \
 && [ ! -e /usr/local/bin/subl ]; then
   ln -sv "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
@@ -59,7 +62,7 @@ else
 fi
 
 
-# brew installs
+echo "brew installs"
 software_list=( bash tig icdiff vim zsh-syntax-highlighting \
   zsh-autosuggestions python3 )
 for item in "${software_list[@]}"; do
@@ -89,8 +92,7 @@ echo "Configuring VIM"
 vim +PlugInstall +qall
 
 
-# pip installs
-
+echo "pip installs"
 software_list=( virtualenv virtualenvwrapper )
 for item in "${software_list[@]}"; do
   if ! pip3 freeze | grep -q "$item"==*; then
@@ -103,4 +105,4 @@ for item in "${software_list[@]}"; do
 done
 
 
-echo "Done configuring the system, please reboot :D"
+echo "Done configuring the system"
