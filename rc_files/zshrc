@@ -46,25 +46,22 @@ plugins=(git docker z)
 
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 source $ZSH/oh-my-zsh.sh
-source ~/.aliases
-source ~/.functions
-source ~/.exports
-source ~/.kuberc && source ~/.admin_kuberc && source ~/.myob_rc
 
+list=(.aliases .functions .exports .kuberc .admin_kuberc .myob_rc)
+for item in ${list[@]}; do
+    source ~/"$item"
+done
 
 # AWS auto completion
 #source /usr/local/share/zsh/site-functions/_aws
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-
 # kb auto suggestions
 source <(kubectl completion zsh)
 
-
 # virtualenv wrapper
 source /usr/local/bin/virtualenvwrapper.sh
-
 
 # adding zsh-autosuggestions.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

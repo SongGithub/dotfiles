@@ -21,19 +21,6 @@ then
 fi
 
 
-echo "Linking files"
-mkdir -p  ~/.dotfiles_backup
-for f in "aliases" "exports" "functions" "vimrc" "zshrc"; do
-  echo "Linking \"$f\""
-  if [ -f ~/.$f ]; then
-    echo "Original file exists, backing it up"
-    mv ~/.$f ~/.dotfiles_backup/$f
-  fi
-  ln -s ~/.dotfiles/$f ~/.$f
-  echo "Linked \"$f\""
-done
-
-
 echo "Linking RC files "
 mkdir -p  ~/.dotfiles_backup
 
@@ -42,14 +29,13 @@ for f in rc_files/*; do
   echo "  processing RC file: \"$file_name\""
 
   if [ -L ~/.$file_name ]; then
-    echo "    Original file exists, backing it up"
+    echo "    Original symlink exists, backing it up"
     mv ~/.$file_name ~/.dotfiles_backup/$file_name
-  else
-    echo "    *********** Linking \"$file_name\""
-    # ln -s "$PWD"/$f ~/.$file_name 2> /dev/null || echo "error linking files" && exit 1
-    ln -s "$PWD"/$f ~/.$file_name
-    echo "    Linked \"$file_name\""
   fi
+  echo "    *********** Linking \"$file_name\""
+  echo "    SOURCE FILE PATH: ""$PWD"/$f
+  ln -s "$PWD"/$f ~/.$file_name # 2> /dev/null || echo "error linking files" && exit 1
+  echo "    Linked \"$file_name\""
 done
 
 
