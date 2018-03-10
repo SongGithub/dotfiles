@@ -42,13 +42,17 @@ HIST_STAMPS="dd/mm/yyyy"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(git docker z)
+plugins=(
+    git
+    docker
+    z
+)
 
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 source $ZSH/oh-my-zsh.sh
 
-list=(.aliases .functions .exports .kuberc .admin_kuberc .myob_rc)
-for item in ${list[@]}; do
+custom_list=(.aliases .functions .exports .kuberc .admin_kuberc .myob_rc)
+for item in ${custom_list[@]}; do
     source ~/"$item"
 done
 
@@ -64,4 +68,4 @@ source <(kubectl completion zsh)
 source /usr/local/bin/virtualenvwrapper.sh
 
 # adding zsh-autosuggestions.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
