@@ -1,4 +1,6 @@
+#!/usr/bin/env bash
 # Cluster configs for PE tribe
+
 alias auth-k-dev='myob-auth k -e dev'
 alias auth-k-qa='myob-auth k -e jupiter-qa'
 

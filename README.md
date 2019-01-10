@@ -23,6 +23,12 @@ Just a bunch of dotfiles
 - Clone source code `git clone git@github.com:songgithub/dotfiles.git ~/.dotfiles`
 - Run setup script `./bootstrap.zsh`
 
+
+## when you need to add a new RC file
+
+- put the `*_rc` file into rc_files dir
+- `cd` into `~/.dotfiles`, and run `~/bootstrap.zsh` in order to create a symlink for the new file.
+
 ## Reference
 
 [Gus's dotfile](https://github.com/gugahoi/dotfiles)

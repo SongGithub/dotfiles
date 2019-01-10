@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
+# this script initialises a new computer with shell settings I am familar with
 
+set -ex
 
-if [[ $SHELL != *"zsh"* ]];
-then
-  echo "Installing oh-my-zsh"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
-
+echo "Installing oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 if ! xcode-select -p > /dev/null;
 then
@@ -34,7 +32,7 @@ for f in rc_files/*; do
   fi
   echo "    *********** Linking \"$file_name\""
   echo "    SOURCE FILE PATH: ""$PWD"/$f
-  ln -s "$PWD"/$f ~/.$file_name # 2> /dev/null || echo "error linking files" && exit 1
+  ln -s "$PWD"/$f ~/.$file_name 2> /dev/null # || echo "error linking files" && exit 1
   echo "    Linked \"$file_name\""
 done
 
@@ -50,7 +48,7 @@ fi
 
 echo "brew installs"
 software_list=( bash tig icdiff vim zsh-syntax-highlighting \
-  zsh-autosuggestions python3 )
+  zsh-autosuggestions python3 kubectx watch )
 for item in "${software_list[@]}"; do
   if ! brew list | grep -q "$item"; then
     echo "Installing fresh $item"

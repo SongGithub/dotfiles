@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Cluster configs
 DEFAULT_KUBE_NAMESPACE="ADD_YOUR_TRIBE_NAMESPACE_HERE"
 alias k-auth-preprod="myob-auth k -e jupiter-preprod -n $DEFAULT_KUBE_NAMESPACE"

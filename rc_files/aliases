@@ -175,3 +175,6 @@ alias dc='docker-compose'
 alias dcr='docker-compose run --rm'
 alias dcb='docker-compose build'
 alias dcu='docker-compose up'
+
+alias python="python3"
+alias pip="pip3"
