@@ -30,7 +30,6 @@ function auth-dmz-non-prod() {
 }
 
 
-
 function auth-dmz-prod() {
 	kubectl config set-cluster dmzprod --server=https://172.24.17.226:6443 --certificate-authority=/tmp/prod-ca.crt --embed-certs=true
 	kubectl config set-credentials azure-user-config --auth-provider=azure --auth-provider-arg=apiserver-id=1f4e75bb-714c-4a10-985b-14ff3a1034dc --auth-provider-arg=client-id=449d806e-d055-485b-b453-a7b3b1425935 --auth-provider-arg=tenant-id=fa5a8b25-2ea1-4eba-80e2-a0a945e1dc36

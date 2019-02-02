@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 # this script initialises a new computer with shell settings I am familar with
 
-set -ex
+set -e
 
 echo "Installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-if ! xcode-select -p > /dev/null;
-then
-  echo "Installing xcode CLI tools"
-  xcode-select --install
-fi
+echo "Installing xcode CLI tools"
+xcode-select --install || true
 
 if ! command -v brew > /dev/null;
 then
@@ -47,8 +44,9 @@ fi
 
 
 echo "brew installs"
-software_list=( bash tig icdiff vim zsh-syntax-highlighting \
-  zsh-autosuggestions python3 kubectx watch )
+software_list=( gcc bash tig icdiff
+  vim zsh-syntax-highlighting \
+  zsh-autosuggestions python kubectx watch )
 for item in "${software_list[@]}"; do
   if ! brew list | grep -q "$item"; then
     echo "Installing fresh $item"
@@ -61,8 +59,8 @@ for item in "${software_list[@]}"; do
         \nsource /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> zshrc
     fi
   else
-    echo "upgrading $item"
-    brew upgrade "$item" 2>/dev/null
+    echo "attempt to upgrade $item"
+    # brew upgrade "$item" || true
   fi
 done
 
@@ -75,18 +73,6 @@ fi
 echo "Configuring VIM"
 vim +PlugInstall +qall
 
+cp patches/minimap_settings.py  ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 
-echo "pip installs"
-software_list=( virtualenv virtualenvwrapper )
-for item in "${software_list[@]}"; do
-  if ! pip3 freeze | grep -q "$item"==*; then
-    echo "installing fresh $item"
-    pip3 install --user "$item"
-  else
-    echo "upgrading $item"
-    pip3 install --user --upgrade "$item"
-  fi
-done
-
-
-echo "Done configuring the system"
+echo "Done configuring the system......."

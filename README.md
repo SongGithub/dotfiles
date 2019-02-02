@@ -3,7 +3,7 @@
 
 ## Why you need this
 
-- Setup a new machine with exactly same familiar settings in __one__ go.
+- Setup a new __Mac__ with exactly same familiar settings in __one__ go.
 - Keep installed software up to date.
 - Ease of maintain your dotfiles: this even adopts programming concept of _separate-of-concern_
 
@@ -28,6 +28,10 @@ Just a bunch of dotfiles
 
 - put the `*_rc` file into rc_files dir
 - `cd` into `~/.dotfiles`, and run `~/bootstrap.zsh` in order to create a symlink for the new file.
+
+## Assumptions:
+- you are using a Mac ( having curl preinstalled ). Skip Mac specific steps if on a Linux.
+- you have installed Sublime Text 3.
 
 ## Reference
 
