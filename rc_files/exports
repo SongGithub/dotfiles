@@ -47,28 +47,13 @@ export MANPAGER='less -X';
 export DOCKER_ID_USER='songgithub'
 
 
-# for Py env
-export PYENV_VERSION='3.6.3'
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-## Prefer to use Pyvenv instead of virtualenv
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-
-
-# virtualenv wrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/code
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
-
-
 # GOPATH
-export GOPATH=$HOME/go-workspace
-export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go/bin
 export GOBIN=$GOPATH/bin
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$GOROOT/bin"
 export PATH="$PATH:$HOME/bin"
 
-
+# NAB - brew without need for root permission 
+export PATH=$PATH:~/apps/homebrew/bin

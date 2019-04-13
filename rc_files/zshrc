@@ -51,7 +51,7 @@ plugins=(
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 source $ZSH/oh-my-zsh.sh
 
-custom_list=(.aliases .functions .exports .kuberc .admin_kuberc .myob_rc .reece_rc)
+custom_list=(.aliases .functions .exports .kuberc .admin_kuberc .myob_rc .nab_rc)
 for item in ${custom_list[@]}; do
     source ~/"$item"
 done
@@ -60,7 +60,7 @@ done
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # kb auto suggestions
-source <(kubectl completion zsh)
+# source <(kubectl completion zsh)
 
 # adding zsh-autosuggestions.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

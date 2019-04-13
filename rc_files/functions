@@ -276,3 +276,6 @@ function fetch-all() {
         git branch --track "${branch##*/}" "$branch"
     done
 }
+
+# open VsCode from terminal
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
