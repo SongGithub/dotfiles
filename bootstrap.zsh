@@ -3,18 +3,14 @@
 
 set -ex
 
-# echo "Installing oh-my-zsh"
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+echo "Installing xcode CLI tools"
+xcode-select --install || true
 
-# echo "Installing xcode CLI tools"
-# xcode-select --install || true
-
-# if ! command -v brew > /dev/null;
-# then
-#   echo "Installing Homebrew"
-#   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# fi
-
+if ! command -v brew > /dev/null;
+then
+  echo "Installing Homebrew"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
 echo "Linking RC files "
 mkdir -p  ~/.dotfiles_backup
