@@ -1,0 +1,7 @@
+export PATH=~/apps/homebrew/bin:$PATH
+export PATH=/Users/$(whoami)/apps/homebrew/Cellar/go/1.12.5/bin:$PATH
+
+. ~/.profile
+# run_cntlm
+
+source /Users/$(whoami)/apps/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh

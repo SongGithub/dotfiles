@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 # this script initialises a new computer with shell settings I am familar with
 
-set -e
-
-echo "Installing oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+set -ex
 
 echo "Installing xcode CLI tools"
 xcode-select --install || true
@@ -14,7 +11,6 @@ then
   echo "Installing Homebrew"
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
-
 
 echo "Linking RC files "
 mkdir -p  ~/.dotfiles_backup
@@ -34,19 +30,19 @@ for f in rc_files/*; do
 done
 
 
-echo "link Sublime Text"
-if [ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ] \
-&& [ ! -e /usr/local/bin/subl ]; then
-  ln -sv "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-else
-  echo "already exists, skipping"
-fi
+# echo "link Sublime Text"
+# if [ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ] \
+# && [ ! -e /usr/local/bin/subl ]; then
+#   ln -sv "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+# else
+#   echo "already exists, skipping"
+# fi
 
 
 echo "brew installs"
-software_list=( gcc bash tig icdiff
+software_list=(  bash tig icdiff
   vim zsh-syntax-highlighting \
-  zsh-autosuggestions python kubectx watch )
+  zsh-autosuggestions watch )
 for item in "${software_list[@]}"; do
   if ! brew list | grep -q "$item"; then
     echo "Installing fresh $item"
@@ -73,6 +69,6 @@ fi
 echo "Configuring VIM"
 vim +PlugInstall +qall
 
-cp patches/minimap_settings.py  ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+# cp patches/minimap_settings.py  ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 
 echo "Done configuring the system......."
