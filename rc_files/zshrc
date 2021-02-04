@@ -51,7 +51,7 @@ plugins=(
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 source $ZSH/oh-my-zsh.sh
 
-custom_list=(.aliases .functions .exports .kuberc .admin_kuberc .myob_rc .reece_rc)
+custom_list=(.aliases .functions .exports .kuberc)
 for item in ${custom_list[@]}; do
     source ~/"$item"
 done

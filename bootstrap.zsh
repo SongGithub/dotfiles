@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # this script initialises a new computer with shell settings I am familar with
 
-set -e
+set -ex
 
 echo "Installing oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+[ ! -d "/Users/$(whoami)/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 echo "Installing xcode CLI tools"
 xcode-select --install || true
@@ -12,7 +12,7 @@ xcode-select --install || true
 if ! command -v brew > /dev/null;
 then
   echo "Installing Homebrew"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 
@@ -23,13 +23,13 @@ for f in rc_files/*; do
   file_name=$(basename "$f")
   echo "  processing RC file: \"$file_name\""
 
-  if [ -L ~/.$file_name ]; then
-    echo "    Original symlink exists, backing it up"
+  if [ -L ~/.$file_name ] || [ -f ~/.$file_name ] ; then
+    echo "    Original file or its symlink exists, backing it up"
     mv ~/.$file_name ~/.dotfiles_backup/$file_name
   fi
-  echo "    *********** Linking \"$file_name\""
+  echo "    *********** Linking \"$file_name\" ***********"
   echo "    SOURCE FILE PATH: ""$PWD"/$f
-  ln -s "$PWD"/$f ~/.$file_name 2> /dev/null # || echo "error linking files" && exit 1
+  ln -s "$PWD"/$f ~/.$file_name 2> /dev/null
   echo "    Linked \"$file_name\""
 done
 
@@ -46,9 +46,9 @@ fi
 echo "brew installs"
 software_list=( gcc bash tig icdiff
   vim zsh-syntax-highlighting \
-  zsh-autosuggestions python kubectx watch )
+  zsh-autosuggestions python kubectx watch wget git openssl)
 for item in "${software_list[@]}"; do
-  if ! brew list | grep -q "$item"; then
+  if ! brew list --formula | grep -q "$item"; then
     echo "Installing fresh $item"
     brew install "$item"
     # add comment and 'source' cmd only if it was not already in zshrc file
@@ -61,6 +61,19 @@ for item in "${software_list[@]}"; do
   else
     echo "attempt to upgrade $item"
     # brew upgrade "$item" || true
+  fi
+done
+
+echo "brew cask installs"
+software_list=( virtualbox postman jq)
+# brew tap homebrew/caskroom
+for item in "${software_list[@]}"; do
+  if ! brew list --cask | grep -q "$item"; then
+    echo "Installing fresh $item"
+    brew install --cask "$item"
+  else
+    echo "attempt to upgrade $item"
+    brew upgrade "$item" || true
   fi
 done
 
