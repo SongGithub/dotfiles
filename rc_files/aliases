@@ -17,7 +17,7 @@ alias g="git"
 alias gs="git status"
 alias h="history"
 alias j="jobs"
-
+alias gco="git checkout"
 alias gd="git icdiff"
 
 # Detect which `ls` flavor is in use
