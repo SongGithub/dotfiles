@@ -48,7 +48,8 @@ plugins=(
     z
 )
 
-export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin"
 source $ZSH/oh-my-zsh.sh
 
 custom_list=(.aliases .functions .exports .kuberc .admin_kuberc .myob_rc .reece_rc)
@@ -63,4 +64,4 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 source <(kubectl completion zsh)
 
 # adding zsh-autosuggestions.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh

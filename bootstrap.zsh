@@ -12,7 +12,8 @@ xcode-select --install || true
 if ! command -v brew > /dev/null;
 then
   echo "Installing Homebrew"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 
@@ -35,12 +36,18 @@ done
 
 
 echo "link Sublime Text"
-if [ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ] \
-&& [ ! -e /usr/local/bin/subl ]; then
-  ln -sv "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+subl_src="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
+subl_bin_dir=/opt/homebrew/bin
+
+if [ -f "$subl_src" ] && [ ! -e "$subl_bin_dir/subl" ]; then
+  ln -sv "$subl_src" "$subl_bin_dir/subl"
 else
   echo "already exists, skipping"
 fi
+
+
+echo "Creating workspace folder"
+mkdir -p ~/workspace
 
 
 echo "brew installs"
@@ -56,7 +63,7 @@ for item in "${software_list[@]}"; do
       echo "Also adding source to zshrc file..."
       printf "\
         \n\n# adding zsh-autosuggestions.zsh \
-        \nsource /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> zshrc
+        \nsource /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> zshrc
     fi
   else
     echo "attempt to upgrade $item"
