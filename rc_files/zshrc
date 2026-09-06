@@ -60,8 +60,13 @@ done
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# kb auto suggestions
-source <(kubectl completion zsh)
+# kb auto suggestions -- guarded. kubectl may be missing entirely, or (on a
+# Mac migrated from Intel) be a stale x86_64 binary that cannot exec without
+# Rosetta. `command -v` passes in that second case, so actually run it once
+# and only source if it succeeded.
+_kubectl_completion="$(kubectl completion zsh 2>/dev/null)" \
+  && source <(printf '%s\n' "$_kubectl_completion")
+unset _kubectl_completion
 
 # adding zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
