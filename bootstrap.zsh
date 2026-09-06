@@ -53,7 +53,7 @@ mkdir -p ~/workspace
 echo "brew installs"
 software_list=( gcc bash tig icdiff
   vim zsh-syntax-highlighting \
-  zsh-autosuggestions python kubectx watch )
+  zsh-autosuggestions python kubectx watch uv )
 for item in "${software_list[@]}"; do
   if ! brew list | grep -q "$item"; then
     echo "Installing fresh $item"
@@ -68,6 +68,21 @@ for item in "${software_list[@]}"; do
   else
     echo "attempt to upgrade $item"
     # brew upgrade "$item" || true
+  fi
+done
+
+echo "Installing uv tools (GitHub Spec Kit / specify)"
+# uv drops entrypoints into ~/.local/bin, which rc_files/exports puts on PATH.
+# Deliberately not using `uv tool update-shell` -- that writes an untracked
+# ~/.zshenv, which does not follow you to the next machine.
+uv_tool_list=( specify-cli )
+for tool in "${uv_tool_list[@]}"; do
+  if uv tool list 2>/dev/null | grep -q "^$tool "; then
+    echo "  $tool already installed, upgrading"
+    uv tool upgrade "$tool" || true
+  else
+    echo "  Installing $tool"
+    uv tool install "$tool"
   fi
 done
 

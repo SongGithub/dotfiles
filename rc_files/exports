@@ -63,6 +63,11 @@ export VIRTUALENVWRAPPER_PYTHON=/opt/homebrew/bin/python3
 export VIRTUALENVWRAPPER_VIRTUALENV=/opt/homebrew/bin/virtualenv
 
 
+# uv-installed CLI tools (specify-cli / Spec Kit, etc.) land here.
+# Equivalent to what `uv tool update-shell` writes to ~/.zshenv, but tracked.
+export PATH="$HOME/.local/bin:$PATH"
+
+
 # GOPATH
 export GOPATH=$HOME/go-workspace
 export GOROOT=/opt/homebrew/opt/go/libexec
