@@ -52,7 +52,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin"
 source $ZSH/oh-my-zsh.sh
 
-custom_list=(.aliases .functions .exports .kuberc .admin_kuberc .myob_rc .reece_rc)
+custom_list=(.aliases .functions .exports)
 for item in ${custom_list[@]}; do
     source ~/"$item"
 done
@@ -65,3 +65,10 @@ source <(kubectl completion zsh)
 
 # adding zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# OpenClaw completion -- guarded, not present on every machine
+test -e "${HOME}/.openclaw/completions/openclaw.zsh" \
+  && source "${HOME}/.openclaw/completions/openclaw.zsh"
+
+# LM Studio CLI (lms) -- guarded, not present on every machine
+test -d "${HOME}/.lmstudio/bin" && export PATH="$PATH:${HOME}/.lmstudio/bin"
