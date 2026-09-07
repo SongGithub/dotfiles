@@ -3,8 +3,12 @@
 
 set -e
 
-echo "Installing oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+if [ -d ~/.oh-my-zsh ]; then
+  echo "oh-my-zsh already installed, skipping"
+else
+  echo "Installing oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
 
 echo "Installing xcode CLI tools"
 xcode-select --install || true
@@ -24,13 +28,13 @@ for f in rc_files/*; do
   file_name=$(basename "$f")
   echo "  processing RC file: \"$file_name\""
 
-  if [ -L ~/.$file_name ]; then
-    echo "    Original symlink exists, backing it up"
+  if [ -e ~/.$file_name ] || [ -L ~/.$file_name ]; then
+    echo "    Original file/symlink exists, backing it up"
     mv ~/.$file_name ~/.dotfiles_backup/$file_name
   fi
   echo "    *********** Linking \"$file_name\""
   echo "    SOURCE FILE PATH: ""$PWD"/$f
-  ln -s "$PWD"/$f ~/.$file_name 2> /dev/null # || echo "error linking files" && exit 1
+  ln -s "$PWD"/$f ~/.$file_name
   echo "    Linked \"$file_name\""
 done
 
