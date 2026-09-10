@@ -108,6 +108,15 @@ for item in "${software_list[@]}"; do
   fi
 done
 
+echo "Ensuring Claude Code CLI is installed"
+if ! brew list --cask claude-code &>/dev/null; then
+  echo "Installing Claude Code"
+  brew install --cask claude-code
+else
+  echo "Upgrading Claude Code"
+  brew upgrade --cask claude-code || true
+fi
+
 echo "Installing uv tools (GitHub Spec Kit / specify)"
 # uv drops entrypoints into ~/.local/bin, which rc_files/exports puts on PATH.
 # Deliberately not using `uv tool update-shell` -- that writes an untracked
@@ -133,5 +142,30 @@ echo "Configuring VIM"
 vim +PlugInstall +qall
 
 cp patches/minimap_settings.py  ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+
+echo "Disabling Sublime Text 3's update-available nagging"
+# ST3 hasn't shipped a release since 2020 (it's also Intel-only -- see
+# README/commit history for the arm64 story), so its built-in update checker
+# permanently sees ST4 as "available" and nags on every launch. Merge
+# update_check=false into Preferences.sublime-settings rather than
+# overwriting it, since it may already hold unrelated user settings.
+subl_prefs_dir="$HOME/Library/Application Support/Sublime Text 3/Packages/User"
+if [ -d "$subl_prefs_dir" ]; then
+  python3 - "$subl_prefs_dir/Preferences.sublime-settings" <<'PYEOF'
+import json
+import sys
+
+path = sys.argv[1]
+try:
+    with open(path) as f:
+        data = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+    data = {}
+data["update_check"] = False
+with open(path, "w") as f:
+    json.dump(data, f, indent=4)
+    f.write("\n")
+PYEOF
+fi
 
 echo "Done configuring the system......."
