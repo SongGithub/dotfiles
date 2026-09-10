@@ -1,13 +1,38 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # this script initialises a new computer with shell settings I am familar with
+#
+# Uses the system /bin/bash (not `env bash`) so a stray x86_64-only bash
+# earlier on PATH (e.g. a stale Homebrew install) can't silently pull this
+# whole script under Rosetta.
 
 set -e
+
+# This bootstrap targets Apple Silicon only. If still somehow invoked from a
+# Rosetta (x86_64) shell, re-launch natively -- CLT's xcrun/libxcrun no
+# longer ships x86_64 slices, so oh-my-zsh's git clone (and other tools)
+# fail deep inside with a cryptic "unable to load libxcrun" error otherwise.
+if [ "$(uname -m)" != "arm64" ]; then
+  if arch -arm64 /usr/bin/true 2>/dev/null; then
+    echo "Detected Rosetta (x86_64) shell; re-launching natively on arm64..."
+    exec arch -arm64 /bin/bash "$0" "$@"
+  else
+    echo "This bootstrap targets Apple Silicon (arm64); this Mac can't run arm64 binaries." >&2
+    exit 1
+  fi
+fi
 
 if [ -d ~/.oh-my-zsh ]; then
   echo "oh-my-zsh already installed, skipping"
 else
   echo "Installing oh-my-zsh"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  # --unattended forces RUNZSH=no and CHSH=no. Without it, when stdin is a
+  # tty the installer defaults to *interactive*: it execs a new zsh shell
+  # (and/or prompts for a chsh password) after printing its banner, which
+  # hands control away from this script instead of returning to it -- this
+  # is why bootstrap looked like it stopped dead right after the oh-my-zsh
+  # ascii art, with everything after (uv tool install, which creates
+  # ~/.local/bin) never running.
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 fi
 
 echo "Installing xcode CLI tools"
@@ -17,8 +42,16 @@ if ! command -v brew > /dev/null;
 then
   echo "Installing Homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
+# Must run every time, not just on fresh install: this is what makes
+# /opt/homebrew/bin win over any stale /usr/local Homebrew leftovers (e.g. an
+# old x86_64 vim) for the rest of this script. Without it, a script invoked
+# with the pre-Homebrew system PATH (/usr/local/bin first) silently runs
+# whatever old Intel binaries are still sitting in /usr/local -- which is
+# exactly what crashed `vim +PlugInstall` with a dyld "Library not loaded"
+# abort against a liblua path that no longer exists.
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 echo "Linking RC files "
