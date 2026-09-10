@@ -1,2 +1,7 @@
 # Local Claude Code settings/permissions -- machine-specific, not shared.
 .claude/settings.local.json
+
+# Nix build output symlinks (e.g. from `darwin-rebuild build`) -- local,
+# regenerated on demand, never meant to be committed.
+result
+result-*

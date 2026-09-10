@@ -82,7 +82,13 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # GOPATH
 export GOPATH=$HOME/go-workspace
-export GOROOT=/opt/homebrew/opt/go/libexec
+# Resolved dynamically rather than hardcoded to a Homebrew path: under the
+# flake.nix path (specs/001-declarative-machine-setup) `go` comes from
+# nixpkgs, at a store path that changes per version/rebuild, so a fixed
+# `/opt/homebrew/opt/go/libexec` would be wrong there -- and modern `go`
+# already knows its own GOROOT, so this only needs to be exported at all
+# for tooling that reads the env var instead of asking the binary.
+command -v go >/dev/null 2>&1 && export GOROOT="$(go env GOROOT)"
 export GOBIN=$GOPATH/bin
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$GOROOT/bin"
