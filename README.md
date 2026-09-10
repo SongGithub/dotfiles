@@ -45,7 +45,7 @@ from the bash/rc_files version (`plan.md`, `data-model.md`).
 One-time only, before anything else in this repo can be applied declaratively:
 
 ```bash
-curl -fsSL https://install.determinate.systems/nix | sh -s -- install
+./install-nix.sh
 ```
 
 Then, from a checkout of this repo:

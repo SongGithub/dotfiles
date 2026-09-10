@@ -5,7 +5,7 @@ Prerequisites: this repo checked out locally; nothing else (the one-time Nix boo
 ## 1. Bootstrap Nix (one-time, imperative — see `research.md`)
 
 ```sh
-curl -fsSL https://install.determinate.systems/nix | sh -s -- install
+./install-nix.sh
 ```
 
 Expected outcome: `nix` and `darwin-rebuild` are on `PATH` in a new shell.
