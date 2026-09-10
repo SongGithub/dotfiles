@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 
 
+# Put native Apple Silicon Homebrew ahead of everything else on PATH.
+# macOS's own /etc/paths lists /usr/local/bin (and /etc/paths.d/homebrew
+# appends /opt/homebrew/bin *after* it), so without this, a legacy Intel
+# Homebrew install left over at /usr/local -- still present and separately
+# updated via Rosetta on this Mac -- silently shadows the correct arm64
+# binaries for anything installed in both places (vim, bash, tig, uv, jq,
+# watch, openssl, the xz/zstd/lz4 tools, etc.), which is what caused
+# `vim +PlugInstall` to abort on a stale x86_64 liblua dependency and `gh`
+# to fail with a cryptic "unable to load libxcrun" error.
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+
 # Make vim the default editor.
 export EDITOR='vim';
 
