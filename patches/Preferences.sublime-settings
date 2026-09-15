@@ -1,0 +1,7 @@
+{
+	"font_size": 14,
+	"update_check": false,
+	// Required by patches/minimap_settings.py, which is a no-op unless
+	// show_minimap is set explicitly.
+	"show_minimap": false
+}

@@ -99,6 +99,12 @@ fi
 echo "Configuring VIM"
 vim +PlugInstall +qall
 
-cp patches/minimap_settings.py  ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+echo "Configuring Sublime Text 3"
+subl_user_dir="$HOME/Library/Application Support/Sublime Text 3/Packages/User"
+
+mkdir -p "$subl_user_dir"
+cp patches/minimap_settings.py "$subl_user_dir"
+cp patches/Preferences.sublime-settings "$subl_user_dir"
+echo "    Copied plugin and user settings"
 
 echo "Done configuring the system......."
