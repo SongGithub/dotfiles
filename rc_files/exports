@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 
 
+# Put native Apple Silicon Homebrew ahead of everything else on PATH.
+# macOS's own /etc/paths lists /usr/local/bin (and /etc/paths.d/homebrew
+# appends /opt/homebrew/bin *after* it), so without this, a legacy Intel
+# Homebrew install left over at /usr/local -- still present and separately
+# updated via Rosetta on this Mac -- silently shadows the correct arm64
+# binaries for anything installed in both places (vim, bash, tig, uv, jq,
+# watch, openssl, the xz/zstd/lz4 tools, etc.), which is what caused
+# `vim +PlugInstall` to abort on a stale x86_64 liblua dependency and `gh`
+# to fail with a cryptic "unable to load libxcrun" error.
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+
 # Make vim the default editor.
 export EDITOR='vim';
 
@@ -70,7 +82,13 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # GOPATH
 export GOPATH=$HOME/go-workspace
-export GOROOT=/opt/homebrew/opt/go/libexec
+# Resolved dynamically rather than hardcoded to a Homebrew path: under the
+# flake.nix path (specs/001-declarative-machine-setup) `go` comes from
+# nixpkgs, at a store path that changes per version/rebuild, so a fixed
+# `/opt/homebrew/opt/go/libexec` would be wrong there -- and modern `go`
+# already knows its own GOROOT, so this only needs to be exported at all
+# for tooling that reads the env var instead of asking the binary.
+command -v go >/dev/null 2>&1 && export GOROOT="$(go env GOROOT)"
 export GOBIN=$GOPATH/bin
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$GOROOT/bin"
