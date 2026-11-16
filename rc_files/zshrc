@@ -52,6 +52,14 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin"
 source $ZSH/oh-my-zsh.sh
 
+# iTerm2's "Option Key Sends" is Normal, so Option+Left/Right emit xterm's
+# modified-arrow CSI sequences (\e[1;3D / \e[1;3C) instead of plain arrows.
+# zsh's default emacs keymap doesn't bind those, so without this the escape
+# sequence is left half-consumed and its trailing byte gets self-inserted
+# (e.g. a stray "D"). Bind them to word-wise cursor movement explicitly.
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;3C' forward-word
+
 custom_list=(.aliases .functions .exports)
 for item in ${custom_list[@]}; do
     source ~/"$item"
